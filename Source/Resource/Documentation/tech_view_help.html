@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<head> 
+ <title>Technical Metadata</title> 
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+</head> 
+<body> 
+<h3>Technical Metadata</h3>The Technical Metadata view displays information about each file (in either a CSV document or a table) including the file size, metadata from the &lt;fmt &gt; chunk, the existence of key metadata chunks, and file warnings.
+<table border="1">
+<tr><th>Value Name</th><th>Description</th></tr><tr><td>FileName</td>
+<td>In order to provide a concise presentation the filepaths are displayed from the directory path where the files diverge. Thus if two files are opened from <b>/HardDrive1/videofiles/movies/videofile.avi</b> and <b>/HardDrive1/videofiles/spokenword/videofileB.avi</b> then these will be displayed in the table view as <b>/movies/videofile.avi</b> and <b>/spokenword/videofileB.avi</b> since the <b>/HardDrive1/videofiles</b> section of the Filepath is common to the open files.<br/>The CSV version of the Technical Metadata view displays the full filepath to each file.</td></tr><tr><td>FileSize</td>
+<td>The size of the video file in bytes.</td></tr>
+<tr><td>Format</td>
+<td>This value represents the type of container utilized by the file, including profile information. Example: AVI (OpenDML).</td></tr>
+<tr><td>Duration</td>
+<td>The total playing time, displayed in HH:MM:SS.mmm (hours, minutes, seconds, milliseconds)</td></tr>
+<tr><td>Vid&nbsp;Format</td>
+<td>The name of the codec used to encode the video data.</td></tr>
+<tr><td>Vid&nbsp;CodecID</td>
+<td>The four character code (fourCC) used by the AVI container to describe the video codec. This value is presented in ASCII characters. Below is a sample of compression codes:	<table border="0">		<tr><td>dvsd</td><td>DV 25 Mbps</td></tr>		<tr><td>DV50</td><td>DV 50 Mbps</td></tr>		<tr><td>H264</td><td>H.264</td></tr>		<tr><td>IV30</td><td>Indeo</td></tr>		<tr><td>JFIF</td><td>JPEG</td></tr>		<tr><td>LJ2K</td><td>JPEG 2000</td></tr>		<tr><td>MP41</td><td>MPEG-4 Visual</td></tr>		<tr><td>v210</td><td>YUV 10 bit</td></tr>	</table></td></tr><tr><td>Vid&nbsp;FrameRate</td>
+<td>The amount of frames per second intended for presentation on playback of the file.</td></tr>
+<tr><td>Vid&nbsp;Width</td>
+<td>The number of pixel columns within the frames of the video stream.</td></tr>
+<tr><td>Vid&nbsp;Height</td>
+<td>The number of pixel rows within the frames of the video stream.</td></tr>
+<tr><td>Vid&nbsp;BitDepth</td>
+<td>The number of bits of data per channel per pixel that the video data will decode to.</td></tr>
+<tr><td>Vid&nbsp;BitRate</td>
+<td>A measurement in bits per second for the video stream.</td></tr>
+<tr><td>Aud&nbsp;Format</td>
+<td>The name of the codec used to encode the audio data.</td></tr>
+<tr><td>Aud&nbsp;Format</td>
+<td>The two character code (twoCC) used by the AVI container to describe the audio codec. This value is presented in hexadecimal representation. Below is a sample of compression codes:
+	<table border="0">
+		<tr><td>0000</td><td>Unknown</td></tr>
+		<tr><td>0001</td><td>PCM / Uncompressed</td></tr>
+		<tr><td>0002</td><td>Microsoft ADPCM</td></tr>
+		<tr><td>0006</td><td>ITU G.711 a-law</td></tr>
+		<tr><td>0007</td><td>ITU G.711 Aµ-law</td></tr>
+		<tr><td>0011</td><td>IMA ADPCM</td></tr>
+		<tr><td>0016</td><td>ITU G.723 ADPCM (Yamaha)</td></tr>
+		<tr><td>0031</td><td>GSM 6.10</td></tr>
+		<tr><td>0040</td><td>ITU G.721 ADPCM</td></tr>
+		<tr><td>0050</td><td>MPEG</td></tr>
+		<tr><td>FFFE</td><td>Extensible (used by Microsoft to provide a GUID as codec identifier)</td></tr>
+		<tr><td>FFFF</td><td>Experimental</td></tr>
+	</table>
+</td></tr>
+<tr><td>Aud&nbsp;Channels</td>
+<td>The number of audio channels encoded within the audio stream.</td></tr><tr><td>Aud&nbsp;SampleRate</td>
+<td>The number of audio samples per second.</td></tr><tr><td>Aud&nbsp;BitRate</td>
+<td>The number of bits utilized per second of audio.</td></tr><tr><td>Aud&nbsp;BitDepth</td>
+<td>The number of bits of data per channel per sample that the audio data will decode to.</td></tr>
+<tr><td>Tdat</td>
+<td>Notes the existance of the Tdat chunk, either 'Yes' or 'No'. The tdat chunk is often used in Grass Valley and Adobe AVI applications.</td></tr><tr><td>INFO</td>
+<td>Notes the existence of the INFO chunk, either 'Yes' or 'No'.</td></tr>
+<tr><td>XMP</td>
+<td>Notes the existence of the XMP chunk, either 'Yes' or 'No'. Right-click on this cell provides options to <i>Import</i>, <i>Export</i>, or <i>Remove</i> xml data. Doubling-clicking on the cell brings a text editor. Changes are not made until the file is saved.</td></tr>
+<tr><td>aXML</td>
+<td>Notes the existence of the aXML chunk, either 'Yes' or 'No'. Right-click on this cell provides options to <i>Import</i>, <i>Export</i>, or <i>Remove</i> xml data. Doubling-clicking on the cell brings a text editor. Changes are not made until the file is saved.</td></tr>
+<tr><td>iXML</td>
+<td>Notes the existence of the iXML chunk, either 'Yes' or 'No'. Right-click on this cell provides options to <i>Import</i>, <i>Export</i>, or <i>Remove</i> xml data. Doubling-clicking on the cell brings a text editor. Changes are not made until the file is saved.</td></tr>
+<tr><td>MD5</td>
+<td>If an MD5 chunk exists, this column will show the stored value. This MD5 value is a checksum of the stream data only and does not include the file's metadata or any other chunk.</td></tr>
+<tr><td>MD5 evaluated</td>
+<td>If the MD5 is evaluated it will appear in this column. Any conflict between this column and the 'MD5' column indicates a change in the stream data portion of the file between the current evaluation and the stored evaluation.</td></tr>
+<tr><td>Errors</td>
+<td>Provides statements about potential structural problems with a given audio files: for instance if the RIFF size statement conflicts with the actual file size or if the audio files does not utilize padding bytes to follow odd byte length chunks.</td></tr>
+<tr><td>Information</td>
+<td>Used for status notes and technical information during operation.</td></tr>
+</table>
+</body>
+</html>

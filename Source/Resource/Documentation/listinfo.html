@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<head> 
+ <title>LIST-INFO Metadata Information</title> 
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+</head> 
+<body> 
+<h3>LIST-INFO Metadata Information</h3>
+<table border='1' summary="This table lists the identifiers and descriptions of the LIST-INFO subchunks">
+<tr><th>Chunk ID</th><th>Name</th><th>Description</th></tr>
+<tr><td>IARL</td><td>Archival Location</td><td>Indicates where the subject of the file is archived.<br/><br/>
+<b>U.S. National Archives Application:</b><p>This element is an approximate equivalent to the Originator element in the Broadcast Wave BEXT chunk which records the entity responsible for the 'archiving' (creation, maintenance, preservation) of this digital item. Of all the info list chunk elements, this is the most important for Federal Agencies because it is vital to document the archival responsibility for a content item.</p>
+<p>Entity designations should be as specific as possible including a two-character county code to avoid the potential for conflict in the archiving entity’s name. The archival entity should be identified at the most specific level within the institution.</p>
+<b>U.S. National Archives Use:</b> Strongly recommended ('required') if using LIST-INFO chunk.<br/><br/>
+
+<b>U.S. National Archives Formatting:</b><ol><li>Two capital letters which must be derived from <a href="http://www.iso.org/iso/country_codes/iso_3166_code_lists.htm">ISO 3166 Country Codes</a></a></li><li>One comma</li><li>One space</li><li>Institutional Acronym. Almost always one word all caps but there are some acronyms that are more than one word. The resource <a href='http://members.cox.net/govdocs/govspeak.html'>GovSpeak: A Guide to Government Acronyms and Abbreviations</a> is suggested as a source but not required.</li></ol><b>Examples:</b><br/>US, NARA<br/>US, LOC/RSS<br/></td></tr>
+<tr><td>IART</td><td>Artist</td><td>Lists the artist of the original subject of the file. For example, Michaelangelo.</td></tr>
+<tr><td>ICMS</td><td>Commissioned</td><td>Lists the name of the person or organization that commissioned the subject of the file. For example, Pope Julian II.</td></tr><tr><td>ICMT</td><td>Comments</td><td>Provides general comments about the file or the subject of the file. If the comment is several sentences long, end each sentence with a period. Do not include newline characters.<br/><br/>
+<b>U.S. National Archives Application:</b><p>This element should manage identifiers associated with the encapsulating file. Each identifier will be labeled as to its origin or purpose using the 'type' and 'comment' qualifiers. Using the tag 'local' in the 'type' qualifier implies the entity identified in the IARL element.</p><br/>
+<b>U.S. National Archives Use:</b> Strongly recommended ('required') if using LIST-INFO chunk.<br/><br/><b>U.S. National Archives Formatting:</b><br/>If labeled: Identifier [comma space] type [comma space] comment [semicolon-space if more than one identifier]<br/>If no labeling: Identifier<br/><br/><b>U.S. National Archives Examples:</b><table border='1'><tr><td>NARA</td><td>58979818, local, principal ID original filename</td></tr><tr><td>NARA</td><td>1275, local, ARC Identifier</td></tr></table></td></tr>
+<tr><td>ICOP</td><td>Copyright</td><td>Records the copyright information for the file. For example, Copyright Encyclopedia International 1991. If there are multiple copyrights, separate them by a semicolon followed by a space.<br/><br/>
+<b>U.S. National Archives Application:</b><p>Information about copyright and other restrictions (donor, privacy, etc.). Usage by federal agencies will often refer to the documentation of restrictions provided by other, non- embedded metadata.</p>
+<p>If used, this element may contain the information as known at the time of embedding.</p><br/>
+<b>U.S. National Archives Use:</b> Optional<br/><br/>
+<b>U.S. National Archives Examples:</b><table border='1'><tr><td>NARA</td><td>Some or all of this material may be restricted by copyright or other intellectual property right restrictions.  Public Law 101-246 (104 Stat. 49), issued February 16, 1990, provides for the domestic release and distribution of U.S. Information Agency motion pictures, videotapes, and other materials 12 years after initial dissemination overseas or, if not disseminated, 12 years from preparation of materials.</td></tr></table></td></tr><tr><td>ICRD</td><td>Creation date</td><td>Specifies the date the subject of the file was created. List dates in year-month-day format, padding one-digit months and days with a zero on the left. For example: 1553-05-03 for May 3, 1553. The year should always be given using four digits.<br/><br/>
+<b>U.S. National Archives Application:</b><p>This element is an equivalent to the OriginationDate in the Broadcast Wave BEXT chunk.</p><br/>
+<b>U.S. National Archives Use:</b> Optional.<br/><br/>
+<b>U.S. National Archives Example:</b> 2005-11-30</td><td>
+<tr><td>IENG</td><td>Engineer</td><td>Stores the name of the engineer who worked on the file. If there are multiple engineers, separate the names by a semicolon and a blank. For example: Smith, John; Adams, Joe.</td></tr><tr><td>IGNR</td><td>Genre</td><td>Describes the original work, such as jazz, classical, rock, etc.</td></tr>
+<tr><td>IKEY</td><td>Keywords</td><td>Provides a list of keywords that refer to the file or subject of the file. Separate multiple keywords with a semicolon and a blank. For example, Seattle; zoology; The Civil War.</td></tr><tr><td>IMED</td><td>Medium</td><td>Describes the original subject of the file, such as Betacam SP, VHS, and so forth.</td></tr>
+<tr><td>INAM</td><td>Name (Title)</td><td>Stores the title of the subject of the file, such as Seattle From Above.<br/><br/>
+<b>U.S. National Archives Application:</b><p>If used, this element should contain a working title.</p>
+<b>U.S. National Archives Use:</b> Optional.<br/><br/>
+<b>U.S. National Archives Examples:</b><table border='1'><tr><td>NARA</td><td>Right To Read, ca. 1978</td></tr></table></td></tr>
+<tr><td>IPRD</td><td>Product (Album)</td><td>Specifies the name of the title the file was originally intended for, such as The Civil War: The Musical.</td></tr>
+<tr><td>ISBJ</td><td>Subject</td><td>Describes the contents of the file, such as Metadata Management.</td></tr>
+<tr><td>ISFT</td><td>Software</td><td>Identifies the name of the software package used to create the file, such as Audacity 1.3.9.</td></tr>
+<tr><td>ISRC</td><td>Source</td><td>Identifies the name of the person or organization who supplied the original subject of the file. For example: NARA.</td></tr>
+<tr><td>ISRF</td><td>Source Form</td><td>Identifies the original form of the material that was digitized, such as record, sampling CD, TV sound track and so forth. This is not necessarily the same as IMED.</td></tr>
+<tr><td>ITCH</td><td>Technician</td><td>Identifies the technician who sampled the subject file. For example: Smith, John.</td></tr>
+<tr><td>ISMP</td><td>SMPTE Time Code</td><td>SMPTE time code of digitization start point expressed as a NULL terminated text string &quot;HH:MM:SS.FF&quot;</td></tr>
+<tr><td>IDIT</td><td>Digitization Date</td><td>Specifies the time and date that digitization commenced.<br/>The digitization time is contained in an ASCII string which contains exactly 26 characters and is in the format &quot;Wed Jan 02 02:03:55 1990\n\0&quot;</td></tr>
+<tr><td>IMIT</td><td>More technical Information</td><td>AVI MetaEdit utilizes IMIT to store tabular data pertaining to the coding process history of the AVI file. See the <a href="imit.html">IMIT section</a> for more information.</td></tr>
+</table>
+</body>
+</html>

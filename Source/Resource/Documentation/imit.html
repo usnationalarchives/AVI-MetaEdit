@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<head> 
+ <title>IMIT (Coding Process History)</title> 
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+</head> 
+<body> 
+<h3>IMIT (Coding Process History)</h3>
+<h4>Background</h4>
+<div>Portions of this specification are based on objectives and formatting guidelines defined in EBU Technical Recommendation 98-1999, Format for the &lt;CodingHistory&gt; field in <a href="http:/tech.edu.ch/docs/r/r098.pdf">Broadcast Wave Format (BWF)</a>. EBU's definition of CodingHistory outlines the formatting, structure, and vocabulary to describe the history of processes applied to an associated audio signal and embed that metadata into the audio file, so that it can be extracted and understood by humans and applications later on.  The definition allows an operator to encapsulate the details of signal processing from the earliest known technical rendition, through intermediate generations, up to the file at hand, within a BWF file header. For instance CodingHistory can document that a BWF file contains audio in 24 bit samples at 48,000 samples per second in 2 channels, then note that the prior generation was a 16 bit, 44.1 kHz compact disc and that the prior generation was a microcassette. Additionally CodingHistory can document the tools, settings, and technical details used to migrate an audio signal from one generation to another.</div>
+<div>&nbsp;</div>
+<div>CodingHistory documents the provenance and technical history of an audio signal stored in a Broadcast Wave Format file.  There is no comparable standardization of this type of documentation for storage within video files or other types of audio files.</div>
+<div>&nbsp;</div>
+<div>Given that AVI is structurally very similar to the Broadcast Wave Format, this recommendation adapts the EBU R98-1999 specification for use in the AVI structure.</div>
+
+<h4>Storage</h4>
+<div>This recommendation utilizes the IMIT tag within the LIST-INFO chunk of an AVI file to store CodingHistory data. LIST-INFO allows descriptive and administrative metadata to be embedded in AVI files in specified tags. The IMIT tag is described by the AVI standard as "More Info Text".  Thus, its use is flexible, within limitations.</div>
+
+<h4>Formatting and Syntax</h4>
+<div>In this specification, the CodingHistory expression within AVI is built from rows of unrestricted ASCII characters each terminated by 0x0D0A (CR/LF). Each row describes a coding process that has been applied to the audiovisual content of the AVI. This may include references to prior generations of the audiovisual data as manifest in analog or digital carriers as well as tools, software, and standards that the audiovisual data has passed through. Entry should focus especially on processes that influence the quality or integrity of audiovisual data (such as changes in chroma-subsampling, bit depth reduction, and standards conversion).</div>
+<div>&nbsp;</div>
+<div>Each row is comprised of strings of parameters and values to define the process. The parameter of each string is expressed as a one or two character abbreviation, followed by a equal sign ("="), then the value of the parameter. Allowable parameters and associated vocabularies are detailed below:</div>
+<table border="1">
+<tr><th>Parameter</th><th>Abbreviation</th><th>Definition</th><th>Vocabulary</th><th>Unit</th></tr></td></tr>
+<tr><td>role</td><td>R=</td><td>The 'role' element defines the generic use or task performed by a given generation of the media or tool used in the processing of the media.</td><td>'source object', 'playback device', 'capture device', 'capture software', 'operating system'</td><td>&nbsp;</td></tr>
+<tr><td>description</td><td>T=</td><td>A free text string for internal use to clarify technical aspects of the coding history record. This string may not contain commas (use semicolons instead) or line breaks.</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>manufacturer</td><td>MN=</td><td>The manufacturer of the tape, file, device, tool, software or piece of technology described in the coding history record.</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>modelName</td><td>MD=</td><td>The name of the model of the tape, file, device, tool, software or piece of technology described in the coding history record. For products use the commericial name of the product, for tape formats use the name of the physical format (<a href="http://metadataregistry.org/concept/list/vocabulary_id/145.html">suggested vocabulary</a>)</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>serialNumber</td><td>SN=</td><td>When applicable, this element may store the serial number of the object described in the coding history record.</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>signal</td><td>SG=</td><td>The 'signal' element describes any standardized audiovisual interface that is used to transmit the signal between tools or elements.</td><td>IEEE1394, SDI, Component, Composite, HD-SDI, S-Video</td><td>&nbsp;</td></tr>
+<tr><td>version</td><td>V=</td><td>The 'version' element expresses the version number of the software, tool, or object used in the process.</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>videoEncoding</td><td>VE=</td><td>The codec identifier of the video encoding. It is recommended to express video encoding using the <a href=\"http://www.fourcc.org/codecs.php\">fourCC (four character code)</a>.</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>audioEncoding</td><td>AE=</td><td>The codec identifier of the audio encoding. It is recommended to express audio encoding using the twoCC (two character code) or fourCC (four character code)</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>videoRate</td><td>VR=</td><td>The average rate of the presentation of video samples.</td><td>10, 12, 15, 18, 20, 23.98, 24, 25, 29.97, 30</td><td>Frames per second</td></tr>
+<tr><td>audioRate</td><td>AR=</td><td>The rate of the presentation of audio samples.</td><td>8000, 11000, 22050, 32000, 44100, 48000, 96000</td><td>Hz</td></tr>
+<tr><td>videoPixelFormat</td><td>PX=</td><td>The pixel format used in the encoded video, including a reference to the colorspace and chroma subsampling.</td><td>abgr, argb, bgr24, bgr444be, bgr444le, bgr48be, bgr48le, bgra, bgra64be, bgra64le, gray, gray16be, gray16le, gray8a, monob, monow, pal8, rgb0, rgb24, rgb4, rgb444be, rgb444le, rgb48be, rgb48le, rgba, rgba64be, rgba64le, uyvy422, uyyvyy411, yuv410p, yuv411p, yuv420p, yuv420p10be, yuv420p10le, yuv420p16be, yuv420p16le, yuv420p9be, yuv420p9le, yuv422p, yuv422p10be, yuv422p10le, yuv422p16be, yuv422p16le, yuv422p9be, yuv422p9le, yuv440p, yuv444p, yuv444p10be, yuv444p10le, yuv444p16be, yuv444p16le, yuv444p9be, yuv444p9le, yuva420p, yuvj420p, yuvj422p, yuvj440p, yuvj444p, yuyv422</td><td>&nbsp;</td></tr>
+<tr><td>videoBitRate</td><td>VB=</td><td>The bit rate of the encoded video track. Not including other portions of the file.</td><td>&nbsp;</td><td>Bytes per second</td></tr>
+<tr><td>audioBitRate</td><td>AB=</td><td>The bit rate of the encoded audio track. Not including other portions of the file.</td><td>&nbsp;</td><td>Bytes per second</td></tr>
+<tr><td>videoBitDepth</td><td>VD=</td><td>This element expresses the sampling size of the encoding video data. Express as the bit depth used per channel rather than per pixel.</td><td>1, 4, 8, 9, 10, 12, 16</td><td>Bit</td></tr>
+<tr><td>audioBitDepth</td><td>AD=</td><td>This element expresses the sampling size of the encoding video data. Express as the bit depth used per channel rather than per stream.</td><td>8, 12, 13, 14, 16, 18, 20, 22, 24, 32</td><td>Bit</td></tr>
+<tr><td>Settings</td><td>ST=</td><td>Description of settings used at this step of the process.</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+
+<h4>Example 1</h4>
+<div>A Super VHS tape is played back from a S-VHS deck into a Blackmagic capture card running on an Ubuntu computer using Media Express capture software.</div>
+<div style="font-family:'Courier'">
+R=source object,MD=S-VHS,T=tape1234<br/>
+R=playback,MN=Sony,MD=SVO-5800,SN=abc1324,ST=internal TBC,SG=component,T=S-VHS deck<br/>
+R=captureDevice,MN=Blackmagic-Design,MD=Decklink Studio SDI,SN=xyz6789,ST=7.5 IRE,VE=2.0.3<br/>
+R=captureSoftware,MN=Blackmagic-Design,MD=Media Express,VE=2.0.3<br/>
+R=operatingSystem,MN=Canonical,MD=Ubuntu,VE=11.04<br/>
+</div>
+
+<h4>Example 2</h4>
+<div>A 1 inch tape is played from an Ampex machine through a time base corrector into a Canopus box to Edius software.</div>
+<div style="font-family:'Courier'">
+R=source object,MD=1 inch; open reel tape<br/>
+R=playback deck,MN=Ampex,MD=VPR80,SN=SN12345<br/>
+R=tbc,MN=Hotronic,MD=AP41,SN=SN12345<br/>
+R=capture device,MN,Canopus,MD=HDBX1000,SN=SN23456<br/>
+R=capture software,MN=Grass Valley,MD=Edius,VE=5.5,SN=SN34567<br/>
+</div>
+
+</body>
+</html>

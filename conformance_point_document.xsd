@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.archives.gov/NARAvideoMD/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.archives.gov/NARAvideoMD/" elementFormDefault="qualified">
+
+<!--
+	To be resolved:
+	What is the namespace for NARAVideoMD?
+	Is NARAVideoMD the final name of the schema?
+    Is the ANALOGDIGITALFLAG attribute in or out? (it seems redundant to other data and possibly the scope of the standard)
+    I change the 'tool' element to 'codingHistory'.
+    Is file/files the appropriate name for the initial element? This implies the standard is restricted to file-based objects. We could use something more generic like object/objects.
+    Currently when a set of 'file' elements are grouped together in a 'files' element, then 'accessConsideration' and 'organization' may  be used to describe the entire set of contained files to reduce redundancy. Are there other elements that could be used to describe an entire set of files rather than individual files only.
+-->
+
+    <xsd:element name="NARAVIDEOMD" type="nara.video.type">
+        <xsd:annotation>
+            <xsd:documentation>NARAVIDEOMD: NARA AudioVisual Metadata Extension Schema. NARAVIDEOMD contains technical and process metadata that describes a digital video object.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="nara.video.type">
+        <xsd:annotation>
+            <xsd:documentation>NARAVIDEOMD may either contain a 'file' or 'files'. The 'files' element is a container for multiple 'file' elements. Use 'files' only when a single media representation is comprised of multiple files.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element name="files" type="files.type"/>
+            <xsd:element name="file" type="file.type"/>
+        </xsd:choice>
+        <xsd:attribute name="recordCreation" type="xsd:dateTime">
+	        <xsd:annotation>
+	            <xsd:documentation>This optional attribute is intended to store a timestamp referring to when the record was initially created.</xsd:documentation>
+	        </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="profile" type="xsd:string">
+	        <xsd:annotation>
+	            <xsd:documentation>This optional attribute may be use to identify </xsd:documentation>
+	        </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="version" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="files.type">
+        <xsd:sequence>
+            <xsd:element name="file" type="file.type" maxOccurs="unbounded"/>
+            <xsd:element name="accessConsideration" type="access.consideration.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="organization" type="organization.type" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="file.type">
+        <xsd:annotation>
+            <xsd:documentation>A type for describing technical characteristics of a video file.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="filename" type="xsd:string"/>
+            <xsd:element name="identifier" type="identifier.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="access" type="access.consideration.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="organization" type="organization.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="date" type="date.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:choice>
+                <xsd:annotation>
+                    <xsd:documentation>Based on pbcore:instantiationPhysical / pbcore:instantiationDigital</xsd:documentation>
+                </xsd:annotation>
+                <xsd:element name="mimetype" type="xsd:string"/>
+                <xsd:element name="physicalFormat" type="xsd:string"/>
+            </xsd:choice>
+            <xsd:element name="duration" type="duration.type" minOccurs="0"/>
+            <xsd:element name="language" type="language.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="security" type="security.type" minOccurs="0"/>
+            <xsd:element name="size" type="size.type" minOccurs="0"/>
+            <xsd:element name="dataRate" type="datarate.type" minOccurs="0"/>
+            <xsd:element name="timecode" type="timecode.info.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="use" type="use.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="color" type="color.type" minOccurs="0"/>
+            <xsd:element name="frame" type="frame.type" minOccurs="0"/>
+            <xsd:element name="frameRate" type="framerate.type" minOccurs="0"/>
+            <xsd:element name="format" type="formatType" minOccurs="0"/>
+            <xsd:element name="location" type="location.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="checksum" type="checksum.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="sound" type="sound.type" minOccurs="0"/>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="codec" type="codec.type"/>
+                <xsd:element name="track" type="track.type"/>
+            </xsd:choice>
+            <xsd:element name="captureHistory" type="captureHistoryType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="track.type">
+        <xsd:sequence>
+            <xsd:element name="identifier" type="identifier.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="date" type="date.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="duration" type="duration.type" minOccurs="0"/>
+            <xsd:element name="language" type="language.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="size" type="size.type" minOccurs="0"/>
+            <xsd:element name="dataRate" type="datarate.type" minOccurs="0"/>
+            <xsd:element name="timecode" type="timecode.info.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="use" type="use.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="color" type="color.type" minOccurs="0"/>
+            <xsd:element name="frame" type="frame.type" minOccurs="0"/>
+            <xsd:element name="frameRate" type="framerate.type" minOccurs="0"/>
+            <xsd:element name="checksum" type="checksum.type" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="sound" type="sound.type" minOccurs="0"/>
+            <xsd:element name="codec" type="codec.type" minOccurs="0"/>
+            <xsd:element name="bitsPerSample" type="xsd:nonNegativeInteger" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>The number of bits of sample depth, e.g., 8, 24, etc.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="bitsPerPixelStored" type="xsd:decimal" minOccurs="0"/>
+            <xsd:element name="compressionRatio" type="xsd:decimal" minOccurs="0"/>
+            <xsd:element name="frameCount" type="xsd:nonNegativeInteger" minOccurs="0"/>
+            <xsd:element name="samplingRate" type="variable.rate.type" minOccurs="0"/>
+            <xsd:element name="samplingCount" type="xsd:nonNegativeInteger" minOccurs="0"/>
+            <xsd:element name="sampling" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The video sampling format used in a digital video
+                        file. (in terms of luminance and chrominance), e.g., 4:2:0, 4:2:2,
+                        2:4:4, etc.)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sampleCount" type="xsd:nonNegativeInteger" minOccurs="0"/>
+            <xsd:element name="signalFormat" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The signal format of a video source item e.g. NTSC, PAL, SECAM.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="num" type="xsd:string"/>
+        <xsd:attribute name="type" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="codingHistoryType">
+        <xsd:annotation>
+            <xsd:documentation></xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="role" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The 'role' element defines the generic use or task performed by a given generation of the media or tool used in the processing of the media. Values may include: 'source object', 'playback device', 'capture device', 'capture software', 'operating system', etc.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="description" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>A free text string for internal use to clarify technical aspects of the coding history record. This string may not contain commas (use semicolons instead) or line breaks.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="manufacturer" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The manufacturer of the tape, file, device, tool, software or piece of technology described in the coding history record.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="modelName" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The name of the model of the tape, file, device, tool, software or piece of technology described in the coding history record. For products use the commericial name of the product, for tape formats use the name of the physical format (suggested vocabulary: http://metadataregistry.org/concept/list/vocabulary_id/145.html)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serialNumber" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>When applicable, this element may store the serial number of the object described in the coding history record.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="videoEncoding" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The codec identifier of the video encoding. It is recommended to express video encoding using the fourCC (four character code). See: http://www.fourcc.org/codecs.php.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="audioEncoding" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The codec identifier of the audio encoding. It is recommended to express video encoding using the twoCC (two character code) or fourCC (four character code).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="videoBitDepth" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>This element expresses the sampling size of the encoding video data. Express as the bit depth used per channel rather than per pixel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="audioBitDepth" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>This element expresses the sampling size of the encoding video data. Express as the bit depth used per channel rather than per stream.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="signal" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The 'signal' element describes any standardized audiovisual interface that is used to transmit the signal between tools or elements. Examples include 'SDI', 'HD-SDI', 'Component', 'Composite', 'IEEE 1394'.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="version" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The 'version' element expresses the version number of the software, tool, or object used in the process.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="captureHistoryType">
+        <xsd:annotation>
+            <xsd:documentation>info about the way the file was created</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="digitizationDate" type="xsd:string" minOccurs="0"/><!-- IDIT -->
+            <xsd:element name="digitizationEngineer" type="xsd:string" minOccurs="0"/><!-- ITCH -->
+            <xsd:element name="source" type="xsd:string"><!-- maps to ISRC, ISRF. to be continued -->
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="codingHistory" type="codingHistoryType" minOccurs="0" maxOccurs="unbounded"><!-- map to IMIT -->
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="processingActions" type="string.with.annotation.ref.type" minOccurs="0" maxOccurs="unbounded"><!-- map to IMIT  -->
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="specificationCompliance" type="string.with.annotation.ref.type" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="validation" type="string.with.annotation.ref.type" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="formatType">
+        <xsd:sequence>
+            <xsd:element name="annotation" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="creatorApp" type="string.version" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Name of the creator of the compression application.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="creatorLib" type="string.version" minOccurs="0"/>
+            <xsd:element name="creatorLibDate" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="creatorLibSettings" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="encodingDate" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="taggedDate" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="commercialName" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="mimetype" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="profile" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="settings" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="codec.type">
+        <xsd:complexContent>
+            <xsd:extension base="formatType">
+                <xsd:sequence>
+                    <xsd:element name="codecID" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="channelCount" type="xsd:nonNegativeInteger" minOccurs="0"/>
+                    <xsd:element name="endianness" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="quality" type="quality.type" minOccurs="0"/>
+                    <xsd:element name="scanType" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="scanOrder" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="sign" type="sign.type" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="string.version">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="version"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="string.other">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="other">
+                    <xsd:annotation>
+                        <xsd:documentation>Denotes a value not contained in a restrictive vocabulary when the value is set to 'Other'.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="string.other.type">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="other">
+                    <xsd:annotation>
+                        <xsd:documentation>Denotes a value not contained in a restrictive vocabulary when the value is set to 'Other'.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="type"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="variable.rate.type">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:decimal">
+                <xsd:attribute name="maximum" type="xsd:decimal"/>
+                <xsd:attribute name="minimum" type="xsd:decimal"/>
+                <xsd:attribute name="nominal" type="xsd:decimal">
+                    <xsd:annotation>
+                        <xsd:documentation>The nominal attribute is used to express any nominal value of rate expressed within the file (which may not be the actually rate), such as a nominal data rate expressed in the header of an mpeg2.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="mode">
+                    <xsd:annotation>
+                        <xsd:documentation>Indicator that the measurement is fixed or variable.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="Fixed"/>
+                            <xsd:enumeration value="Variable"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="identifier.type">
+        <xsd:simpleContent>
+            <xsd:extension base="string.with.annotation.ref.type">
+                <xsd:annotation>
+                    <xsd:documentation>The type of tracking code, e.g., system number, actual shelf numbers, bar-code, file identifier, track identifier, etc. Use the type attribute to declare the source or authority of the identifier.</xsd:documentation>
+                    <xsd:documentation>Based on pbcore:instantiationIdentifer / pbcore:essenceTrackIdentifier</xsd:documentation>
+                </xsd:annotation>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="date.type">
+        <xsd:annotation>
+            <xsd:documentation>For management of any dates associated with the file, including creation or modification dates or dates embedded within the file.</xsd:documentation>
+            <xsd:documentation>Based on pbcore:instantiationDate</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:dateTime">
+                <xsd:attribute name="annotation" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="duration.type">
+        <xsd:annotation>
+            <xsd:documentation>Elapsed time of the entire file, expressed using ISO 8601 syntax; see http://www.w3.org/TR/NOTE-datetime.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="language.type">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="security.type">
+        <xsd:annotation>
+            <xsd:documentation>Type of security applied to a digital video file e.g. password, encryption, hidden, etc.... </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="size.type">
+        <xsd:annotation>
+            <xsd:documentation>The size of the file or track measured in bytes.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:nonNegativeInteger"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="datarate.type">
+        <xsd:simpleContent>
+            <xsd:extension base="variable.rate.type">
+                <xsd:annotation>
+                    <xsd:documentation>Data rate of the compressed data over time expressed in bytes per second.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="timecode.info.type">
+        <xsd:annotation>
+            <xsd:documentation>Storage of the initial timecode value (if present).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="recordMethod" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation>Method for recording timecode on the video source item</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="type" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation>Type of timecode recorded on video source item, e.g., SMPTE dropframe, SMPTE nondropframe, etc..</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="use.type"><!-- updated with NARA vocab -->
+        <xsd:annotation>
+            <xsd:documentation>Use of the digital video file, e.g. Master, Service, Preview, etc..... Use Other if none of the preceding values pertains and clarify the use in the otherUse element</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="string.other">
+	            <xsd:enumeration value="Preservation Master"/>
+	            <xsd:enumeration value="Reproduction Master"/>
+	            <xsd:enumeration value="Distribution Copy - ARC/OPA"/>
+	            <xsd:enumeration value="Other"/>
+                <xsd:enumeration value="Master"/>
+                <xsd:enumeration value="Service"/>
+                <xsd:enumeration value="Service_High"/>
+                <xsd:enumeration value="Service_Low"/>
+                <xsd:enumeration value="Preview"/>
+                <xsd:enumeration value="Other"/>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="color.type">
+        <xsd:annotation>
+            <xsd:documentation>Presented color of the digital video file. Use Other if none of the preceding values pertains and clarify the color in the otherColor element</xsd:documentation>
+            <xsd:documentation>The definition and vocabulary are adopted from PBCore.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="string.other">
+                <xsd:enumeration value="B&amp;W"/>
+                <xsd:enumeration value="Color"/>
+                <xsd:enumeration value="Grayscale"/>
+                <xsd:enumeration value="B&amp;W with grayscale sequences"/>
+                <xsd:enumeration value="B&amp;W with color sequences"/>
+                <xsd:enumeration value="Grayscale with B&amp;W sequences"/>
+                <xsd:enumeration value="Grayscale with color sequences"/>
+                <xsd:enumeration value="Color with B&amp;W sequences"/>
+                <xsd:enumeration value="Color with grayscale sequences"/>
+                <xsd:enumeration value="Other"/>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="frame.type">
+        <xsd:annotation>
+            <xsd:documentation>frame.type: Complex Type for recording the size of a frame in a digital video file. frame.type has 6 elements pixelsHorizontal, pixelsVertical, PAR, DAR and rotation.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="pixelsHorizontal" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The horizontal dimension of a frame in pixels.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="pixelsVertical" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The vertical dimension of a frame in pixels.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PAR" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Pixel aspect ratio (present as a ratio or decimal).</xsd:documentation></xsd:annotation>
+            </xsd:element>
+            <xsd:element name="DAR" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Display aspect ratio (present as a ratio or decimal such as 4/3 or 6/9 or 1.33333).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="rotation" type="xsd:decimal" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The rotation in a decimal value (express of a percentage of clockwise rotation).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="framerate.type">
+        <xsd:simpleContent>
+            <xsd:restriction base="variable.rate.type">
+                <xsd:annotation>
+                    <xsd:documentation>The number of frames per second at which the video source item was digitized.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="location.type">
+        <xsd:annotation>
+            <xsd:documentation>Location of the referenced file</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+        <xsd:restriction base="string.other.type">
+        <!-- move this list to restrict the location@type not the location
+            <xsd:enumeration value="URN"/>
+            <xsd:enumeration value="URL"/>
+            <xsd:enumeration value="PURL"/>
+            <xsd:enumeration value="HANDLE"/>
+            <xsd:enumeration value="DOI"/>
+            <xsd:enumeration value="OTHER"/>
+            -->
+        </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:simpleType name="sound.type">
+        <xsd:annotation>
+            <xsd:documentation>Indicator of the presence of sound in the file or track. The sound field indicates whether a representation of sound is present in a file or track; for example, a 4 track DV file may have 4 audio tracks but only have a representative sound recording on the first two tracks and no audio recording on the last two tracks.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Yes"/>
+            <xsd:enumeration value="No"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="quality.type">
+        <xsd:restriction base="xsd:NMTOKEN">
+            <xsd:enumeration value="Lossless"/>
+            <xsd:enumeration value="Lossy"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="sign.type">
+        <xsd:annotation>
+            <xsd:documentation>Order of bit significance in a byte from left to right.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Little"/>
+            <xsd:enumeration value="Big"/>
+            <xsd:enumeration value="Mixed"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="string.with.annotation.ref.type">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="annotation" type="xsd:string"/>
+                <xsd:attribute name="ref" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="checksum.type">
+        <xsd:annotation>
+            <xsd:documentation>checksum.type: Complex Type for recording the type of messageDigest used for a file. checksum.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="algorithm" type="xsd:string" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation>Type of messageDigest used.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="dateTime" type="xsd:dateTime">
+                    <xsd:annotation>
+                        <xsd:documentation>The datetime when the checksum was calculated and applied</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="access.consideration.type">
+        <xsd:annotation>
+            <xsd:documentation></xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="type" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="contact_reference" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="statement" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="expiration_date" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="documentation_date" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="organization.type">
+        <xsd:annotation>
+            <xsd:documentation></xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="organization_main" minOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <xsd:element name="role" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="role_note" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="organization_division" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <xsd:element name="role" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="role_note" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
