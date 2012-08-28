@@ -1,0 +1,25 @@
+Source: avimetaedit
+Priority: optional
+Maintainer: Jerome Martinez <info@mediaarea.net>
+Build-Depends: debhelper (>= 5), tofrodos, libqt4-dev, pkg-config, automake, autoconf, libtool
+Standards-Version: 3.7.3
+Section: libs
+Homepage: http://mediaarea.net
+
+Package: avimetaedit
+Section: utils
+Architecture: any
+Depends: 
+Description: AVI MetaEdit provides:
+ .
+ (To be filled)
+
+Package: avimetaedit-gui
+Section: utils
+Architecture: any
+Depends: libqt4-gui
+Description: AVI MetaEdit provides:
+ .
+ (To be filled)
+ .
+ This package contains the graphical user interface

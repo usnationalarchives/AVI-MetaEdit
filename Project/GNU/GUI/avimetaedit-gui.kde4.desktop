@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Service
+Name=avimetaedit-gui.desktop
+Encoding=UTF-8
+ServiceTypes=KonqPopupMenu/Plugin,video/*
+Actions=avimetaedit-gui
+X-KDE-Priority=TopLevel
+
+[Desktop Action avimetaedit-gui]
+Name=AVI MetaEdit
+GenericName=Media Editor
+Exec=avimetaedit-gui %u
+Icon=avimetaedit

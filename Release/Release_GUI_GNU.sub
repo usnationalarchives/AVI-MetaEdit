@@ -1,0 +1,38 @@
+#! /bin/sh
+
+#-----------------------------------------------------------------------
+# $1=OS, $2=Platform
+Release_GUI()
+{
+#-----------------------------------------------------------------------
+# Clean up
+test -e AVI_MetaEdit_GUI_$1_$2.tar     && rm    AVI_MetaEdit_GUI_$1_$2.tar
+test -e AVI_MetaEdit_GUI_$1_$2.tar.bz2 && rm    AVI_MetaEdit_GUI_$1_$2.tar.bz2
+test -d AVI_MetaEdit_GUI_$1_$2         && rm -r AVI_MetaEdit_GUI_$1_$2
+mkdir   AVI_MetaEdit_GUI_$1_$2
+
+#-----------------------------------------------------------------------
+# Copying : Exe
+cp ../Project/GNU/GUI/avimetaedit-gui AVI_MetaEdit_GUI_$1_$2/avimetaedit-gui
+cd AVI_MetaEdit_GUI_$1_$2
+strip avimetaedit-gui
+cd ..
+
+#-----------------------------------------------------------------------
+# Copying : Information file
+cp ../License.html AVI_MetaEdit_GUI_$1_$2/
+cp ../History_GUI.txt AVI_MetaEdit_GUI_$1_$2/History.txt
+cp ../conformance_point_document.xsd AVI_MetaEdit_GUI_$1_$2
+cp ReadMe_GUI_$1.txt AVI_MetaEdit_GUI_$1_$2/ReadMe.txt
+
+#-----------------------------------------------------------------------
+# Compressing Archive
+tar jchf AVI_MetaEdit_GUI_$1_$2.tar.bz2 AVI_MetaEdit_GUI_$1_$2
+
+#-----------------------------------------------------------------------
+# Clean up
+#if "%1"=="SkipCleanUp" goto SkipCleanUp
+#rm -r AVI_MetaEdit_GUI_$1_$2
+#:SkipCleanUp
+}
+
