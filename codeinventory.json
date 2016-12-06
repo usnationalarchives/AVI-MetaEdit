@@ -1,0 +1,16 @@
+﻿{
+  "name": "AVI-MetaEdit",
+  "description": "Software to perform various metadata editing for AVI files. You can use the tool to embed, edit, import, and export metadata.",
+  "license": "https://github.com/usnationalarchives/AVI-MetaEdit/commit/63550ce58d5648ab36eb4f04b05174f556fe660f",
+  "openSourceProject": 1,
+  "governmentWideReuseProject": 1,
+  "tags": [
+    "NARA",
+    "Metadata",
+    "Video",
+    "AVI"
+  ],
+  "contact": {
+    "email": "leslie.johnston@nara.gov"
+  }
+}
